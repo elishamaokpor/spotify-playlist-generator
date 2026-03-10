@@ -1,6 +1,6 @@
 export default function handler(req, res) {
   const scope = 'playlist-modify-public playlist-modify-private';
-  const redirectUri = 'https://whatsthesoundtrack.vercel.app';
+  const redirectUri = 'https://whatsthesoundtrack.vercel.app/';
   
   const params = new URLSearchParams({
     response_type: 'code',
