@@ -2,7 +2,7 @@ export default async function handler(req, res) {
   if (req.method !== 'POST') return res.status(405).end();
 
   const { code, tracks, playlistName, description } = req.body;
-  const redirectUri = 'https://whatsthesoundtrack.vercel.app/callback';
+  const redirectUri = 'https://whatsthesoundtrack.vercel.app/';
 
   try {
     // 1. Exchange code for access token
