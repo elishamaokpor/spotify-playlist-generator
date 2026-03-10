@@ -481,12 +481,17 @@
   .track-header-right { display: flex; gap: 20px; align-items: center; }
 
   .track-row {
-    background: var(--cream2);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 10px 20px;
-  }
+  background: var(--cream2);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+.track-row:hover {
+  background: var(--yellow);
+}
 
   .track-left {
     display: flex;
