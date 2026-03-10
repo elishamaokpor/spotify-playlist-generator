@@ -934,12 +934,12 @@ async function handleCallback() {
   const params = new URLSearchParams(window.location.search);
   const code = params.get('code');
   if (!code) return;
+  window.history.replaceState({}, document.title, '/');
 
   const pending = sessionStorage.getItem('pendingPlaylist');
   if (!pending) return;
-  
+
   const data = JSON.parse(pending);
-  sessionStorage.removeItem('pendingPlaylist');
 
   try {
     const res = await fetch('/api/spotify-save', {
@@ -954,7 +954,10 @@ async function handleCallback() {
     });
     const result = await res.json();
     if (result.playlistUrl) {
+      sessionStorage.removeItem('pendingPlaylist');
       window.location.href = result.playlistUrl;
+    } else {
+      console.error('spotify-save error:', JSON.stringify(result));
     }
   } catch (err) {
     alert('something went wrong saving to Spotify :(');
