@@ -52,14 +52,18 @@ export default async function handler(req, res) {
     // 4. Search for each track and get URI
     const trackUris = [];
     for (const track of tracks) {
-      const searchRes = await fetch(
-        `https://api.spotify.com/v1/search?q=${encodeURIComponent(track.title + ' ' + track.artist)}&type=track&limit=1`,
-        { headers: { 'Authorization': `Bearer ${accessToken}` } }
-      );
-      const searchData = await searchRes.json();
-      const uri = searchData.tracks?.items?.[0]?.uri;
-      if (uri) trackUris.push(uri);
-    }
+  try {
+    const searchRes = await fetch(
+      `https://api.spotify.com/v1/search?q=${encodeURIComponent(track.title + ' ' + track.artist)}&type=track&limit=1`,
+      { headers: { 'Authorization': `Bearer ${accessToken}` } }
+    );
+    const searchData = await searchRes.json();
+    const uri = searchData.tracks?.items?.[0]?.uri;
+    if (uri) trackUris.push(uri);
+  } catch (e) {
+    console.error('track search failed:', track.title, e);
+  }
+}
 
     // 5. Add tracks to playlist
     await fetch(`https://api.spotify.com/v1/playlists/${playlistId}/tracks`, {
