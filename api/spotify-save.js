@@ -37,6 +37,7 @@ export default async function handler(req, res) {
       body: JSON.stringify({ name: playlistName, description, public: false })
     });
     const playlistData = await createRes.json();
+    console.error('playlistData:', JSON.stringify(playlistData));
 
     const trackUris = (await Promise.all(
       tracks.map(async (track) => {
