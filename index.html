@@ -909,15 +909,13 @@ Format:
     {
       "title": "song title",
       "artist": "artist name",
-      "duration": "m:ss",
-      "spotifyUrl": "https://open.spotify.com/track/REALTRACKID"
+      "duration": "m:ss"
     }
   ]
 }
 
 Rules:
 - Songs must be real and exist on Spotify
-- Include the real Spotify track URL for each song (https://open.spotify.com/track/...)
 - Match the emotional and sonic vibe precisely
 - Vary genres if appropriate
 - The playlist name should be poetic and specific, not generic
@@ -964,7 +962,7 @@ Rules:
     trackList.innerHTML = '';
 
     data.tracks.forEach((track, i) => {
-      const spotifyUrl = track.spotifyUrl || `https://open.spotify.com/search/${encodeURIComponent(track.title + ' ' + track.artist)}`;
+      const spotifyUrl = `https://open.spotify.com/search/${encodeURIComponent(track.title + ' ' + track.artist)}`;
       const row = document.createElement('div');
       row.className = 'track-row';
       row.innerHTML = `
