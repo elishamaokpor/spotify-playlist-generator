@@ -57,7 +57,8 @@ export default async function handler(req, res) {
       body: JSON.stringify({ uris: trackUris })
     });
 
-    res.status(200).json({ playlistUrl: playlistData.external_urls.spotify });
+    if (!playlistData.id) throw new Error('playlist_create_failed: ' + JSON.stringify(playlistData));
+res.status(200).json({ playlistUrl: playlistData.external_urls.spotify });
 
   } catch (err) {
     res.status(500).json({ error: err.message });
