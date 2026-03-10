@@ -758,16 +758,17 @@
   </div>
 
   <!-- Save to library button -->
-  <a class="save-btn" id="saveLibraryBtn" href="https://open.spotify.com/search/" target="_blank">
-    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-      <path d="M10 4v12M4 10h12" stroke="white" stroke-width="2.5" stroke-linecap="square"/>
-    </svg>
-    Save to your library
-  </a>
+  <button class="save-btn" onclick="saveToSpotify()">
+  <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+    <path d="M10 4v12M4 10h12" stroke="white" stroke-width="2.5" stroke-linecap="square"/>
+  </svg>
+  Save to your library
+</button>
 
 </div>
 
 <script>
+  let currentPlaylistData = null;
   let currentMode = 'feeling';
   const modeLabels = {
     feeling: 'describe your feeling',
@@ -873,6 +874,7 @@ Rules:
   }
 
   function renderResults(data) {
+    currentPlaylistData = data;
     document.getElementById('playlistName').textContent = data.playlistName || 'your playlist';
     document.getElementById('playlistDesc').textContent = data.description || '';
     document.getElementById('modalTitle').textContent = `playlist_result.txt - ${data.tracks.length} tracks`;
@@ -924,6 +926,47 @@ Rules:
     return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
   }
 
+function saveToSpotify() {
+  if (!currentPlaylistData) return;
+  // store playlist data in sessionStorage for after redirect
+  sessionStorage.setItem('pendingPlaylist', JSON.stringify(currentPlaylistData));
+  window.location.href = '/api/spotify-auth';
+}
+
+// handle callback after Spotify login
+async function handleCallback() {
+  const params = new URLSearchParams(window.location.search);
+  const code = params.get('code');
+  if (!code) return;
+
+  const pending = sessionStorage.getItem('pendingPlaylist');
+  if (!pending) return;
+  
+  const data = JSON.parse(pending);
+  sessionStorage.removeItem('pendingPlaylist');
+
+  try {
+    const res = await fetch('/api/spotify-save', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        code,
+        tracks: data.tracks,
+        playlistName: data.playlistName,
+        description: data.description
+      })
+    });
+    const result = await res.json();
+    if (result.playlistUrl) {
+      window.location.href = result.playlistUrl;
+    }
+  } catch (err) {
+    alert('something went wrong saving to Spotify :(');
+  }
+}
+
+// run on page load
+handleCallback();
 
 </script>
 </body>
