@@ -1,0 +1,924 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>What's the Soundtrack to This?</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Silkscreen:wght@400;700&family=Courier+Prime:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --sage: #c8d4b8;
+    --cream: #fffbec;
+    --cream2: #e7e1ce;
+    --dark: #2a2a2a;
+    --green: #4a9b5f;
+    --green-light: #6dbd83;
+    --yellow: #f5c842;
+    --red: #e15051;
+    --amber: #f1c040;
+    --muted: #555;
+    --white: #ffffff;
+    --border: 3.723px solid black;
+    --shadow-lg: 6.206px 6.206px 0px 0px black;
+    --shadow-md: 4.964px 4.964px 0px 0px black;
+    --shadow-sm: 2.482px 2.482px 0px 0px black;
+    --shadow-xs: 1.525px 1.525px 0px 0px black;
+  }
+
+  body {
+    background-color: var(--sage);
+    background-image:
+      linear-gradient(rgba(0,0,0,0.07) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,0,0,0.07) 1px, transparent 1px);
+    background-size: 40px 40px;
+    min-height: 100vh;
+    font-family: 'Courier Prime', monospace;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 60px 20px 100px;
+  }
+
+  /* ── BROWSER WINDOW ── */
+  .browser-window {
+    width: 942px;
+    max-width: 100%;
+    box-shadow: var(--shadow-lg);
+    position: relative;
+  }
+
+  .browser-topbar {
+    background: var(--dark);
+    border: var(--border);
+    border-bottom: none;
+    display: flex;
+    align-items: center;
+    gap: 182px;
+    padding: 12px 20px;
+  }
+
+  .traffic-lights {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+  }
+
+  .dot {
+    width: 24.8px; height: 24.8px;
+    border-radius: 50%;
+    border: 2.5px solid;
+    flex-shrink: 0;
+  }
+  .dot-red   { background: var(--red);   border-color: #ec8786; }
+  .dot-amber { background: var(--amber); border-color: #f6d380; }
+  .dot-green { background: var(--green-light); border-color: #9ad2a9; }
+
+  .browser-title {
+    font-family: 'Silkscreen', monospace;
+    color: var(--cream);
+    font-size: 19.858px;
+    letter-spacing: -0.4px;
+    white-space: nowrap;
+  }
+
+  .browser-urlbar {
+    background: var(--cream);
+    border: var(--border);
+    border-bottom: none;
+    display: flex;
+    align-items: center;
+    gap: 44px;
+    padding: 20px 25px;
+  }
+
+  .url-input {
+    background: white;
+    border: 1.862px solid black;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 15px 12px;
+    flex: 1;
+  }
+
+  .url-text {
+    font-family: 'Courier Prime', monospace;
+    color: var(--muted);
+    font-size: 14.893px;
+    letter-spacing: -0.3px;
+  }
+
+  .lock-icon {
+    width: 16px; height: 16px;
+    flex-shrink: 0;
+  }
+
+  .go-btn {
+    background: var(--green);
+    border: 2.5px solid black;
+    box-shadow: var(--shadow-sm);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 15px 25px;
+    cursor: pointer;
+    font-family: 'Silkscreen', monospace;
+    color: white;
+    font-size: 19.86px;
+    letter-spacing: -0.4px;
+    white-space: nowrap;
+    text-decoration: none;
+    flex-shrink: 0;
+  }
+
+  /* ── MAIN CONTENT AREA ── */
+  .browser-content {
+    background: var(--cream);
+    border: var(--border);
+    border-top: none;
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 74px;
+  }
+
+  /* ── BADGE ── */
+  .badge {
+    background: var(--yellow);
+    border: 2.5px solid black;
+    box-shadow: var(--shadow-md);
+    padding: 12px;
+    font-family: 'Silkscreen', monospace;
+    font-size: 19.858px;
+    letter-spacing: -0.4px;
+    white-space: nowrap;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 37px;
+    text-align: center;
+    width: 100%;
+  }
+
+  .hero-title {
+    font-family: 'Silkscreen', monospace;
+    font-size: 79.431px;
+    line-height: 1;
+    letter-spacing: -4.77px;
+    color: black;
+  }
+
+  .hero-title .green { color: var(--green); letter-spacing: -1px; }
+
+  .hero-subtitle {
+    font-family: 'Courier Prime', monospace;
+    color: var(--muted);
+    font-size: 14.893px;
+    letter-spacing: -0.3px;
+    line-height: 1.5;
+  }
+
+  /* ── FORM SECTION ── */
+  .form-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 37px;
+    width: 100%;
+  }
+
+  /* ── TOGGLE TABS ── */
+  .toggle-group {
+    display: flex;
+    width: 892px;
+    max-width: 100%;
+  }
+
+  .toggle-tab {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 12px;
+    border: 2.5px solid black;
+    box-shadow: var(--shadow-md);
+    cursor: pointer;
+    font-family: 'Silkscreen', monospace;
+    font-size: 19.86px;
+    letter-spacing: -0.4px;
+    background: var(--cream);
+    color: black;
+    transition: background 0.1s, color 0.1s;
+    user-select: none;
+  }
+
+  .toggle-tab.active {
+    background: var(--green);
+    color: white;
+  }
+
+  .play-icon {
+    width: 20px; height: 20px;
+    flex-shrink: 0;
+  }
+
+  /* ── INPUT AREA ── */
+  .input-area {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .input-header {
+    background: var(--dark);
+    border: var(--border);
+    border-bottom: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 20px;
+  }
+
+  .input-header-text {
+    font-family: 'Silkscreen', monospace;
+    color: var(--cream);
+    font-size: 19.858px;
+    letter-spacing: -0.4px;
+    white-space: nowrap;
+  }
+
+  .input-textarea {
+    background: white;
+    border: 1.862px solid black;
+    padding: 15px 12px;
+    height: 166px;
+    font-family: 'Courier Prime', monospace;
+    font-size: 14.893px;
+    letter-spacing: -0.3px;
+    color: var(--dark);
+    resize: none;
+    outline: none;
+    width: 100%;
+  }
+
+  .input-textarea::placeholder { color: var(--muted); }
+
+  /* ── CTA BUTTON ── */
+  .cta-btn {
+    background: var(--green);
+    border: 2.5px solid black;
+    box-shadow: var(--shadow-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 15px 25px;
+    width: 892px;
+    max-width: 100%;
+    cursor: pointer;
+    font-family: 'Silkscreen', monospace;
+    color: white;
+    font-size: 19.86px;
+    letter-spacing: -0.4px;
+    white-space: nowrap;
+    border: 2.5px solid black;
+    transition: opacity 0.1s, transform 0.05s;
+  }
+
+  .cta-btn:hover { opacity: 0.9; }
+  .cta-btn:active { transform: translate(2px, 2px); box-shadow: none; }
+  .cta-btn:disabled { opacity: 0.7; cursor: not-allowed; }
+
+
+  /* ── LOADING STATE ── */
+  .loading-section {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    padding: 40px 0;
+  }
+
+  .loading-section.visible { display: flex; }
+
+  .loading-bar-wrap {
+    width: 892px;
+    background: var(--dark);
+    border: var(--border);
+    border-bottom: none;
+    padding: 12px 20px;
+    font-family: 'Silkscreen', monospace;
+    color: var(--cream);
+    font-size: 14px;
+    letter-spacing: -0.3px;
+  }
+
+  .loading-track {
+    width: 892px;
+    background: white;
+    border: 1.862px solid black;
+    height: 10px;
+    overflow: hidden;
+  }
+
+  .loading-bar {
+    height: 100%;
+    background: var(--green);
+    width: 0%;
+    animation: loadingProgress 2.5s ease-in-out forwards;
+  }
+
+  @keyframes loadingProgress {
+    0%   { width: 0%; }
+    60%  { width: 70%; }
+    90%  { width: 85%; }
+    100% { width: 100%; }
+  }
+
+  .loading-dots {
+    font-family: 'Silkscreen', monospace;
+    color: var(--muted);
+    font-size: 14px;
+    animation: blink 1s step-end infinite;
+  }
+
+  @keyframes blink { 50% { opacity: 0; } }
+
+  /* ── RESULTS SECTION ── */
+  .results-section {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+    width: 942px;
+    margin-top: 40px;
+    animation: fadeSlideUp 0.4s ease forwards;
+  }
+
+  .results-section.visible { display: flex; }
+
+  @keyframes fadeSlideUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── PLAYLIST MODAL ── */
+  .playlist-modal {
+    width: 100%;
+    box-shadow: var(--shadow-lg);
+  }
+
+  .modal-topbar {
+    background: var(--dark);
+    border: var(--border);
+    border-bottom: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 20px;
+  }
+
+  .modal-topbar-text {
+    font-family: 'Silkscreen', monospace;
+    color: var(--cream);
+    font-size: 19.858px;
+    letter-spacing: -0.4px;
+    white-space: nowrap;
+  }
+
+  .modal-body {
+    background: var(--cream);
+    border: var(--border);
+    border-top: none;
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    gap: 60px;
+  }
+
+  /* ── PLAYLIST HEADER ── */
+  .playlist-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .music-note-box {
+    background: var(--yellow);
+    border: 2.5px solid black;
+    box-shadow: var(--shadow-md);
+    width: 111px;
+    height: 101px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .music-note-box svg { width: 50px; height: 50px; }
+
+  .playlist-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 493px;
+  }
+
+  .playlist-label {
+    font-family: 'Courier Prime', monospace;
+    color: var(--muted);
+    font-size: 14.893px;
+    letter-spacing: -0.3px;
+  }
+
+  .playlist-name {
+    font-family: 'Silkscreen', monospace;
+    font-size: 19.858px;
+    letter-spacing: -0.4px;
+    color: black;
+    line-height: 1.3;
+  }
+
+  .playlist-desc {
+    font-family: 'Courier Prime', monospace;
+    color: var(--muted);
+    font-size: 14.893px;
+    letter-spacing: -0.3px;
+    line-height: 1.4;
+  }
+
+  /* ── TRACK TABLE ── */
+  .track-table {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .track-header {
+    background: var(--dark);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+    font-family: 'Silkscreen', monospace;
+    color: var(--cream);
+    font-size: 19.858px;
+    letter-spacing: -0.4px;
+    white-space: nowrap;
+  }
+
+  .track-header-left { display: flex; gap: 18px; align-items: center; }
+  .track-header-right { display: flex; gap: 20px; align-items: center; }
+
+  .track-row {
+    background: var(--cream2);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+  }
+
+  .track-left {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+  }
+
+  .track-num {
+    font-family: 'Courier Prime', monospace;
+    color: var(--muted);
+    font-size: 12px;
+    letter-spacing: -0.24px;
+    width: 15px;
+    flex-shrink: 0;
+  }
+
+  .track-info { display: flex; flex-direction: column; gap: 4px; }
+
+  .track-title {
+    font-family: 'Courier Prime', monospace;
+    font-weight: 700;
+    font-size: 14.893px;
+    letter-spacing: -0.3px;
+    color: black;
+    white-space: nowrap;
+  }
+
+  .track-artist {
+    font-family: 'Courier Prime', monospace;
+    color: var(--muted);
+    font-size: 12px;
+    letter-spacing: -0.24px;
+  }
+
+  .track-right {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+  }
+
+  .track-play-btn {
+    background: var(--green);
+    border: 1.525px solid black;
+    box-shadow: var(--shadow-xs);
+    display: flex;
+    align-items: center;
+    gap: 7.6px;
+    padding: 9px 15px;
+    cursor: pointer;
+    font-family: 'Silkscreen', monospace;
+    color: white;
+    font-size: 12.204px;
+    letter-spacing: -0.24px;
+    white-space: nowrap;
+    text-decoration: none;
+    transition: opacity 0.1s;
+  }
+
+  .track-play-btn:hover { opacity: 0.85; }
+  .track-play-btn svg { width: 12px; height: 12px; flex-shrink: 0; }
+
+  .track-duration {
+    font-family: 'Courier Prime', monospace;
+    color: var(--muted);
+    font-size: 12px;
+    letter-spacing: -0.24px;
+    white-space: nowrap;
+  }
+
+  /* ── SAVE TO LIBRARY BTN ── */
+  .save-btn {
+    background: var(--green);
+    border: 2.5px solid black;
+    box-shadow: var(--shadow-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 15px 25px;
+    width: 892px;
+    max-width: 100%;
+    cursor: pointer;
+    font-family: 'Silkscreen', monospace;
+    color: white;
+    font-size: 19.86px;
+    letter-spacing: -0.4px;
+    white-space: nowrap;
+    text-decoration: none;
+    transition: opacity 0.1s;
+    align-self: center;
+  }
+
+  .save-btn:hover { opacity: 0.9; }
+
+  /* ── ERROR STATE ── */
+  .error-msg {
+    display: none;
+    font-family: 'Courier Prime', monospace;
+    color: var(--red);
+    font-size: 14px;
+    text-align: center;
+    padding: 10px;
+    border: 1.862px solid var(--red);
+    background: #fff5f5;
+    width: 892px;
+  }
+  .error-msg.visible { display: block; }
+</style>
+</head>
+<body>
+
+<!-- ── BROWSER WINDOW ── -->
+<div class="browser-window">
+
+  <!-- Top bar -->
+  <div class="browser-topbar">
+    <div class="traffic-lights">
+      <div class="dot dot-red"></div>
+      <div class="dot dot-amber"></div>
+      <div class="dot dot-green"></div>
+    </div>
+    <span class="browser-title">Internet explorer 6.0</span>
+  </div>
+
+  <!-- URL bar -->
+  <div class="browser-urlbar">
+    <div class="url-input">
+      <svg class="lock-icon" viewBox="0 0 16 16" fill="none">
+        <rect x="3" y="7" width="10" height="8" rx="1" stroke="#555" stroke-width="1.5"/>
+        <path d="M5 7V5a3 3 0 016 0v2" stroke="#555" stroke-width="1.5" fill="none"/>
+        <circle cx="8" cy="11" r="1.5" fill="#555"/>
+      </svg>
+      <span class="url-text">soundtrack/exe/generate</span>
+    </div>
+    <div class="go-btn">
+      go
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+        <path d="M3 10h14M12 5l5 5-5 5" stroke="white" stroke-width="2" stroke-linecap="square"/>
+      </svg>
+    </div>
+  </div>
+
+  <!-- Main content -->
+  <div class="browser-content">
+
+    <!-- Badge -->
+    <div class="badge">elisha.ma's whimsies v0.1</div>
+
+    <!-- Hero -->
+    <div class="hero">
+      <div class="hero-title">
+        <div>What's the</div>
+        <div class="green">soundtrack</div>
+        <div>to this?</div>
+      </div>
+      <div class="hero-subtitle">
+        <div>describe a feeling, a moment, or an era.</div>
+        <div>we'll find the 10 songs that match the vibe ;p</div>
+      </div>
+    </div>
+
+    <!-- Form -->
+    <div class="form-section">
+
+      <!-- Toggle tabs -->
+      <div class="toggle-group" id="toggleGroup">
+        <button class="toggle-tab active" data-mode="feeling" onclick="switchTab(this, 'feeling')">
+          <svg class="play-icon" viewBox="0 0 20 20" fill="currentColor">
+            <path d="M5 4l12 6-12 6V4z"/>
+          </svg>
+          a feeling
+        </button>
+        <button class="toggle-tab" data-mode="moment" onclick="switchTab(this, 'moment')">
+          <svg class="play-icon" viewBox="0 0 20 20" fill="currentColor">
+            <path d="M5 4l12 6-12 6V4z"/>
+          </svg>
+          a Moment
+        </button>
+        <button class="toggle-tab" data-mode="era" onclick="switchTab(this, 'era')">
+          <svg class="play-icon" viewBox="0 0 20 20" fill="currentColor">
+            <path d="M5 4l12 6-12 6V4z"/>
+          </svg>
+          an era
+        </button>
+      </div>
+
+      <!-- Input area -->
+      <div class="input-area">
+        <div class="input-header">
+          <span class="input-header-text" id="inputLabel">describe your feeling</span>
+        </div>
+        <textarea
+          class="input-textarea"
+          id="userInput"
+          placeholder="e.g. i feel like dancing under the rain in a country where no one knows my name (that rhymed)..."
+        ></textarea>
+      </div>
+
+      <!-- Error -->
+      <div class="error-msg" id="errorMsg"></div>
+
+      <!-- Loading state (hidden until triggered) -->
+      <div class="loading-section" id="loadingSection">
+        <div class="loading-bar-wrap" id="loadingText">scanning vibes... please wait.exe</div>
+        <div class="loading-track"><div class="loading-bar" id="loadingBar"></div></div>
+        <div class="loading-dots">compiling playlist<span id="dotAnim">...</span></div>
+      </div>
+
+      <!-- CTA Button -->
+      <button class="cta-btn" id="generateBtn" onclick="generatePlaylist()">
+        <svg class="play-icon" viewBox="0 0 20 20" fill="currentColor">
+          <path d="M5 4l12 6-12 6V4z"/>
+        </svg>
+        generate playlist.exe
+      </button>
+
+    </div>
+  </div>
+</div>
+
+<!-- ── RESULTS SECTION ── -->
+<div class="results-section" id="resultsSection">
+
+  <!-- Playlist modal -->
+  <div class="playlist-modal">
+    <div class="modal-topbar">
+      <span class="modal-topbar-text" id="modalTitle">playlist_result.txt - 10 tracks</span>
+    </div>
+    <div class="modal-body">
+
+      <!-- Playlist header -->
+      <div class="playlist-header">
+        <div class="music-note-box">
+          <svg viewBox="0 0 50 50" fill="none">
+            <path d="M18 38V14l20-4v24" stroke="#2a2a2a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="14" cy="38" r="4" fill="#2a2a2a"/>
+            <circle cx="34" cy="34" r="4" fill="#2a2a2a"/>
+          </svg>
+        </div>
+        <div class="playlist-meta">
+          <span class="playlist-label">// YOUR PLAYLIST</span>
+          <span class="playlist-name" id="playlistName">3am and still awake</span>
+          <span class="playlist-desc" id="playlistDesc">the kind of music you listen to at a random club in ibiza</span>
+        </div>
+      </div>
+
+      <!-- Track table -->
+      <div class="track-table">
+        <div class="track-header">
+          <div class="track-header-left">
+            <span>#</span>
+            <span>title/artist</span>
+          </div>
+          <div class="track-header-right">
+            <span>play</span>
+            <span>time</span>
+          </div>
+        </div>
+        <div id="trackList"></div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Save to library button -->
+  <a class="save-btn" id="saveLibraryBtn" href="https://open.spotify.com/search/" target="_blank">
+    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+      <path d="M10 4v12M4 10h12" stroke="white" stroke-width="2.5" stroke-linecap="square"/>
+    </svg>
+    Save to your library
+  </a>
+
+</div>
+
+<script>
+  let currentMode = 'feeling';
+  const modeLabels = {
+    feeling: 'describe your feeling',
+    moment: 'describe your moment',
+    era: 'describe your era'
+  };
+  const modePlaceholders = {
+    feeling: 'e.g. i feel like dancing under the rain in a country where no one knows my name (that rhymed)...',
+    moment: 'e.g. sitting in a car on a late night drive, city lights blurring past...',
+    era: 'e.g. late 2000s tumblr era, indie sleaze, feeling like a protagonist...'
+  };
+
+  function switchTab(el, mode) {
+    document.querySelectorAll('.toggle-tab').forEach(t => t.classList.remove('active'));
+    el.classList.add('active');
+    currentMode = mode;
+    document.getElementById('inputLabel').textContent = modeLabels[mode];
+    document.getElementById('userInput').placeholder = modePlaceholders[mode];
+  }
+
+  async function generatePlaylist() {
+    const input = document.getElementById('userInput').value.trim();
+    if (!input) {
+      showError('please describe something first :)');
+      return;
+    }
+
+    const btn = document.getElementById('generateBtn');
+    const loadingSection = document.getElementById('loadingSection');
+    const resultsSection = document.getElementById('resultsSection');
+    const errorMsg = document.getElementById('errorMsg');
+
+    // Reset
+    errorMsg.classList.remove('visible');
+    resultsSection.classList.remove('visible');
+
+    // Show loading
+    btn.disabled = true;
+    btn.innerHTML = `<svg class="play-icon" viewBox="0 0 20 20" fill="currentColor"><path d="M5 4l12 6-12 6V4z"/></svg> generating...`;
+    loadingSection.classList.add('visible');
+
+    // Reset loading bar animation
+    const bar = document.getElementById('loadingBar');
+    bar.style.animation = 'none';
+    bar.offsetHeight; // reflow
+    bar.style.animation = 'loadingProgress 2.5s ease-in-out forwards';
+
+    const systemPrompt = `You are a music curator. Given a ${currentMode} the user describes, suggest exactly 10 real songs that perfectly match the vibe. Return ONLY valid JSON, no markdown, no explanation.
+
+Format:
+{
+  "playlistName": "short evocative name (2-5 words, lowercase)",
+  "description": "one line description of the vibe (lowercase)",
+  "tracks": [
+    {
+      "title": "song title",
+      "artist": "artist name",
+      "duration": "m:ss"
+    }
+  ]
+}
+
+Rules:
+- Songs must be real and exist on Spotify
+- Match the emotional and sonic vibe precisely
+- Vary genres if appropriate
+- The playlist name should be poetic and specific, not generic
+- Return ONLY the JSON object, nothing else`;
+
+    try {
+      const response = await fetch('https://api.anthropic.com/v1/messages', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          model: 'claude-sonnet-4-20250514',
+          max_tokens: 1000,
+          system: systemPrompt,
+          messages: [{ role: 'user', content: `${currentMode}: ${input}` }]
+        })
+      });
+
+      const data = await response.json();
+
+      if (data.error) throw new Error(data.error.message);
+
+      const text = data.content?.[0]?.text || '';
+      const clean = text.replace(/```json|```/g, '').trim();
+      const parsed = JSON.parse(clean);
+
+      // Wait for loading bar to finish
+      await new Promise(r => setTimeout(r, 800));
+
+      loadingSection.classList.remove('visible');
+      renderResults(parsed);
+
+    } catch (err) {
+      loadingSection.classList.remove('visible');
+      showError(`something went wrong: ${err.message}`);
+    } finally {
+      btn.disabled = false;
+      btn.innerHTML = `<svg class="play-icon" viewBox="0 0 20 20" fill="currentColor"><path d="M5 4l12 6-12 6V4z"/></svg> generate playlist.exe`;
+    }
+  }
+
+  function renderResults(data) {
+    document.getElementById('playlistName').textContent = data.playlistName || 'your playlist';
+    document.getElementById('playlistDesc').textContent = data.description || '';
+    document.getElementById('modalTitle').textContent = `playlist_result.txt - ${data.tracks.length} tracks`;
+
+    const trackList = document.getElementById('trackList');
+    trackList.innerHTML = '';
+
+    data.tracks.forEach((track, i) => {
+      const spotifyUrl = `https://open.spotify.com/search/${encodeURIComponent(track.title + ' ' + track.artist)}`;
+      const row = document.createElement('div');
+      row.className = 'track-row';
+      row.innerHTML = `
+        <div class="track-left">
+          <span class="track-num">${i + 1}</span>
+          <div class="track-info">
+            <span class="track-title">${escHtml(track.title)}</span>
+            <span class="track-artist">${escHtml(track.artist)}</span>
+          </div>
+        </div>
+        <div class="track-right">
+          <a class="track-play-btn" href="${spotifyUrl}" target="_blank">
+            <svg viewBox="0 0 20 20" fill="currentColor"><path d="M5 4l12 6-12 6V4z"/></svg>
+            play
+          </a>
+          <span class="track-duration">${escHtml(track.duration || '3:30')}</span>
+        </div>
+      `;
+      trackList.appendChild(row);
+    });
+
+    // Update save to library link (search for playlist name)
+    const searchQuery = encodeURIComponent(data.playlistName || 'playlist');
+    document.getElementById('saveLibraryBtn').href = `https://open.spotify.com/search/${searchQuery}`;
+
+    const resultsSection = document.getElementById('resultsSection');
+    resultsSection.classList.add('visible');
+    setTimeout(() => {
+      resultsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 100);
+  }
+
+  function showError(msg) {
+    const el = document.getElementById('errorMsg');
+    el.textContent = msg;
+    el.classList.add('visible');
+  }
+
+  function escHtml(s) {
+    return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+
+
+</script>
+</body>
+</html>
