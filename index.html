@@ -905,10 +905,6 @@ Rules:
       trackList.appendChild(row);
     });
 
-    // Update save to library link (search for playlist name)
-    const searchQuery = encodeURIComponent(data.playlistName || 'playlist');
-    document.getElementById('saveLibraryBtn').href = `https://open.spotify.com/search/${searchQuery}`;
-
     const resultsSection = document.getElementById('resultsSection');
     resultsSection.classList.add('visible');
     setTimeout(() => {
